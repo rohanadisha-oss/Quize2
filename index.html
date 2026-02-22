@@ -1,0 +1,1050 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>বাংলা ব্যাকরণ</title>
+    <style>
+        /* General Styles */
+        :root {
+            --primary-color: #4CAF50;
+            --secondary-color: #2196F3;
+            --background-gradient-start: #e0f2f7;
+            --background-gradient-end: #c8e6c9;
+            --text-color: #333;
+            --border-color: #ccc;
+            --card-bg: #fff;
+            --correct-color: #4CAF50;
+            --wrong-color: #f44336;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--background-gradient-start) 0%, var(--background-gradient-end) 100%);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align content to the top */
+            box-sizing: border-box;
+        }
+
+        .container {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            max-width: 800px;
+            width: 100%;
+            margin: 20px auto;
+            box-sizing: border-box;
+        }
+
+        h1, h2, h3 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2.2em;
+        }
+
+        h2 {
+            font-size: 1.8em;
+        }
+
+        h3 {
+            font-size: 1.5em;
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        /* Input and Button Styles */
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            box-sizing: border-box;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .secondary-button {
+            background-color: var(--secondary-color);
+        }
+
+        .secondary-button:hover {
+            background-color: #1976d2;
+        }
+
+        /* Section Specific Styles */
+        .header-section, .student-info-section, .quiz-section, .result-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background-color: #fdfdfd;
+        }
+        .header-section {
+            background: linear-gradient(to right, #66bb6a, #81c784);
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header-section h1, .header-section p {
+            color: white;
+            margin: 5px 0;
+            padding: 0;
+        }
+        .header-section h1 {
+            font-size: 2em;
+        }
+        .header-section p {
+            font-size: 1.1em;
+        }
+
+        #student-info-form {
+            text-align: center;
+        }
+        #student-info-form label {
+            text-align: left;
+        }
+
+        #quiz-container {
+            display: none;
+        }
+
+        .question {
+            margin-bottom: 25px;
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            background-color: #ffffff;
+        }
+
+        .question p {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+
+        .options label {
+            display: block;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            position: relative;
+            padding-left: 35px; /* Space for custom radio */
+        }
+
+        .options label:hover {
+            background-color: #f5f5f5;
+        }
+
+        .options input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+        }
+
+        /* Custom Radio Button Visuals */
+        .options label > span {
+            display: block;
+            margin-left: 0;
+            position: relative;
+            line-height: 1.5em; /* Ensure text alignment with custom radio */
+        }
+        .options label > span::before {
+            content: '';
+            position: absolute;
+            left: -25px; /* Position relative to the span, adjusted for padding-left on label */
+            top: 50%;
+            transform: translateY(-50%);
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 2px solid var(--primary-color);
+            background-color: white;
+            box-sizing: border-box;
+        }
+        .options input[type="radio"]:checked + span::before {
+            background-color: var(--primary-color);
+            box-shadow: inset 0 0 0 4px white;
+        }
+        .options input[type="radio"]:checked + span {
+            font-weight: bold;
+        }
+
+        .timer {
+            font-size: 1.2em;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #ffe0b2; /* Light orange for timer */
+            border-radius: 5px;
+            color: #e65100; /* Darker orange text */
+            display: none; /* Hidden by default */
+        }
+
+        .result-section {
+            display: none;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .result-section h2 {
+            margin-bottom: 25px;
+            color: #00796b;
+        }
+
+        .result-details {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .result-item {
+            flex: 1 1 calc(50% - 20px); /* Two items per row on larger screens */
+            padding: 15px;
+            background-color: #e8f5e9;
+            border-radius: 8px;
+            text-align: left;
+            min-width: 200px;
+            box-sizing: border-box;
+        }
+
+        .result-item strong {
+            color: var(--primary-color);
+        }
+
+        .student-result-info {
+            background-color: #f1f8e9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+        .student-result-info p {
+            margin: 5px 0;
+        }
+
+
+        /* Answer highlighting */
+        .correct-answer {
+            background-color: var(--correct-color) !important;
+            color: white;
+        }
+        .wrong-answer {
+            background-color: var(--wrong-color) !important;
+            color: white;
+        }
+        /* Style for custom radio button when an option is highlighted */
+        .correct-answer > span::before, .wrong-answer > span::before {
+            border-color: white !important;
+            box-shadow: inset 0 0 0 4px white !important;
+        }
+
+        /* Ensure the correct answer is shown if a wrong answer was selected */
+        .wrong-selected .options label.correct-label {
+            background-color: #c8e6c9 !important; /* Light green for correct option if wrong was chosen */
+            border: 1px solid var(--correct-color) !important;
+            color: var(--text-color); /* Keep text color readable */
+        }
+        .wrong-selected .options label.correct-label > span::before {
+             border-color: var(--correct-color) !important;
+             box-shadow: inset 0 0 0 4px #e8f5e9 !important; /* Light green inner dot */
+             background-color: var(--correct-color) !important; /* Darker green dot */
+        }
+
+
+        /* Mobile-first adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            .container {
+                margin: 10px auto;
+                padding: 15px;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            h3 {
+                font-size: 1.3em;
+            }
+            button {
+                padding: 10px 15px;
+                font-size: 1em;
+            }
+            .result-item {
+                flex: 1 1 100%; /* One item per row on small screens */
+            }
+            .header-section h1 {
+                font-size: 1.8em;
+            }
+            .header-section p {
+                font-size: 1em;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: none;
+                padding: 0;
+                display: block;
+                font-size: 12pt;
+                color: black;
+            }
+            .container {
+                box-shadow: none;
+                border: none;
+                padding: 0;
+                margin: 0;
+                max-width: 100%;
+                width: 100%;
+            }
+            .header-section, .student-info-section, #quiz-container, .timer {
+                display: none !important; /* Hide quiz elements for result print */
+            }
+            .result-section {
+                display: block !important;
+                page-break-after: always; /* Ensure results start on a new page */
+                padding: 15mm;
+                text-align: left;
+            }
+            .result-section h2, .result-section h3 {
+                color: black;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+            .result-details {
+                justify-content: flex-start;
+                gap: 10mm;
+            }
+            .result-item {
+                border: 1px solid #ccc;
+                background-color: #f9f9f9;
+                padding: 10mm;
+                flex: 1 1 calc(50% - 10mm);
+                box-sizing: border-box;
+                page-break-inside: avoid;
+            }
+            .student-result-info {
+                background-color: #f0f0f0;
+                border: 1px solid #ddd;
+                padding: 10mm;
+                margin-bottom: 15mm;
+            }
+            button, .quiz-section .submit-button, .quiz-section .question, .quiz-section .options label {
+                display: none !important;
+            }
+            /* Show specific question details for print */
+            .result-section .question-for-print {
+                display: block !important;
+                margin-bottom: 15px;
+                padding: 10px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                background-color: #fff;
+            }
+            .result-section .question-for-print p {
+                font-weight: bold;
+                margin-bottom: 8px;
+            }
+            .result-section .question-for-print .option-for-print {
+                display: block;
+                margin-left: 20px;
+                position: relative;
+                padding: 3px 0;
+            }
+            .result-section .question-for-print .option-for-print.correct {
+                color: var(--correct-color);
+                font-weight: bold;
+            }
+            .result-section .question-for-print .option-for-print.wrong-selected {
+                color: var(--wrong-color);
+                font-weight: bold;
+            }
+             .result-section .question-for-print .option-for-print.correct::before {
+                content: '✔';
+                position: absolute;
+                left: -15px;
+                color: var(--correct-color);
+            }
+             .result-section .question-for-print .option-for-print.wrong-selected::before {
+                content: '✖';
+                position: absolute;
+                left: -15px;
+                color: var(--wrong-color);
+            }
+            .print-only {
+                display: block !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+        }
+        /* Hidden by default, only for print output */
+        .question-for-print {
+            display: none;
+        }
+        .print-only {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-section">
+            <h1>FULBARI AMINIA HIGH MADRASAH(H.S)</h1>
+            <p>Class: IX</p>
+            <p>Subject: Bengali</p>
+            <p>Topic: ইলিয়াস গল্প</p>
+        </div>
+
+        <div id="student-info-section" class="student-info-section">
+            <h2>শিক্ষার্থীর তথ্য</h2>
+            <form id="student-info-form">
+                <label for="student-name">শিক্ষার্থীর নাম:</label>
+                <input type="text" id="student-name" required>
+
+                <label for="roll-number">রোল নম্বর:</label>
+                <input type="text" id="roll-number" required>
+
+                <button type="submit" id="start-quiz-button">কুইজ শুরু করুন</button>
+            </form>
+        </div>
+
+        <div id="quiz-container" class="quiz-section">
+            <div class="timer" id="quiz-timer">সময় বাকি: 30:00</div>
+            <h2 style="margin-top: 0;">বাংলা ব্যাকরণ</h2>
+            <div id="questions-area">
+                <!-- Questions will be dynamically loaded here -->
+            </div>
+            <button id="submit-quiz-button" disabled>কুইজ জমা দিন</button>
+        </div>
+
+        <div id="result-container" class="result-section">
+            <h2>ফলাফল পত্র</h2>
+            <div class="student-result-info">
+                <p><strong>শিক্ষার্থীর নাম:</strong> <span id="result-student-name"></span></p>
+                <p><strong>রোল নম্বর:</strong> <span id="result-roll-number"></span></p>
+                <p><strong>শ্রেণি:</strong> CLASS TEN</p>
+                <p><strong>বিষয়:</strong> Bengali GRAMMAR</p>
+                <p><strong>তারিখ:</strong> <span id="result-date"></span></p>
+            </div>
+            <div class="result-details">
+                <div class="result-item">
+                    <p><strong>মোট নম্বর:</strong> <span id="total-marks"></span></p>
+                </div>
+                <div class="result-item">
+                    <p><strong>প্রাপ্ত নম্বর:</strong> <span id="obtained-marks"></span></p>
+                </div>
+                <div class="result-item">
+                    <p><strong>শতাংশ:</strong> <span id="percentage"></span></p>
+                </div>
+                <div class="result-item">
+                    <p><strong>গ্রেড:</strong> <span id="grade"></span></p>
+                </div>
+            </div>
+
+            <h3 class="print-only" style="margin-top: 30px;">আপনার উত্তর পর্যালোচনা:</h3>
+            <div id="review-questions-area" class="print-only">
+                <!-- Reviewed questions will be dynamically loaded here for print and review -->
+            </div>
+
+            <div class="no-print">
+                <button id="download-pdf-button" class="secondary-button">ফলাফল PDF ডাউনলোড করুন</button>
+                <button id="retry-quiz-button">পুনরায় চেষ্টা করুন</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+           /*==========এখানে যোগ করুন  =======***/
+const questions = [
+  {
+    question: "নির্দেশক ব্যবহারের মূল উদ্দেশ্য কী, যা কেবল ব্যক্তি বা বস্তুর সংখ্যা নির্দেশনার চেয়েও গভীর অর্থ বহন করে?",
+    options: [
+      "বাক্যের মধ্যে আলঙ্কারিক সৌন্দর্য বৃদ্ধি করা।",
+      "ক্রিয়া পদের সাথে বিশেষ্যের সম্পর্ক স্থাপন করা।",
+      "ব্যক্তি বা বস্তুকে সুনির্দিষ্টভাবে চিহ্নিত করে অর্থের স্পষ্টতা ও নির্দিষ্টতা আনয়ন।",
+      "শুধুমাত্র বাক্যের ছন্দ বজায় রাখা।",
+    ],
+    correctAnswer: 2,
+  },
+  {
+    question: "কারক ও অকারকের মৌলিক পার্থক্য মূলত কিসের উপর নির্ভরশীল?",
+    options: [
+      "শব্দের রূপতাত্ত্বিক গঠন।",
+      "ক্রিয়াপদের সাথে পদের প্রত্যক্ষ বা পরোক্ষ সম্পর্ক।",
+      "বাক্যের দৈর্ঘ্য এবং জটিলতা।",
+      "বিশেষ্য ও সর্বনাম পদের ব্যবহার।",
+    ],
+    correctAnswer: 1,
+  },
+  {
+    question: "সম্বন্ধ পদ ও সম্বোধন পদকে কেন 'অকারক' শ্রেণীভুক্ত করা হয়?",
+    options: [
+      "কারণ এরা বাক্যে অপ্রয়োজনীয়।",
+      "এরা ক্রিয়ার সাথে সরাসরি কোনো সম্পর্ক স্থাপন করে না।",
+      "এদের কোনো নির্দিষ্ট বিভক্তি থাকে না।",
+      "এরা কেবল বিশেষ্য ও সর্বনামের পরিবর্তন ঘটায়।",
+    ],
+    correctAnswer: 1,
+  },
+  {
+    question: "অধিকরণ কারকের মাধ্যমে ক্রিয়া সম্পাদনের আধার বা স্থান নির্দেশ করার পেছনে বাক্যগত তাৎপর্য কী?",
+    options: [
+      "কর্তার সক্রিয়তা হ্রাস করা।",
+      "ক্রিয়ার কাল নির্ধারণ করা।",
+      "ক্রিয়ার সংঘটনের বাস্তব ক্ষেত্রকে সুনির্দিষ্ট করা।",
+      "বাক্যকে দীর্ঘতর করা।",
+    ],
+    correctAnswer: 2,
+  },
+  {
+    question: "বিভক্তি ও অনুসর্গের মধ্যে তাদের পদসৃষ্টি ও বাক্যগত ভূমিকা নিরিখে প্রধান পার্থক্যটি কী?",
+    options: [
+      "বিভক্তি শব্দের অর্থ পরিবর্তন করে, অনুসর্গ করে না।",
+      "বিভক্তি শব্দের অবিচ্ছেদ্য অংশ হিসেবে যুক্ত হয়, যেখানে অনুসর্গ স্বাধীন অব্যয় পদ হিসেবে পরে বসে।",
+      "অনুসর্গ শুধুমাত্র ক্রিয়ার সাথে যুক্ত হয়, বিভক্তি হয় না।",
+      "উভয়ই একই কাজ করে, কেবল তাদের নাম ভিন্ন।",
+    ],
+    correctAnswer: 1,
+  },
+  {
+    question: "অনুসর্গ ব্যবহারের মাধ্যমে বাক্যে অর্থের কী ধরনের বিশেষ স্পষ্টতা আসে?",
+    options: [
+      "ক্রিয়ার সম্পূর্ণ বিলোপ ঘটায়।",
+      "শব্দের পরে বসে পদের সঙ্গে ক্রিয়ার বা অন্য পদের বিশেষ সম্পর্ক স্থাপন করে।",
+      "বাক্যের মধ্যে অপ্রয়োজনীয় তথ্য যোগ করে।",
+      "শুধুমাত্র বাক্যকে শ্রুতিমধুর করে তোলে।",
+    ],
+    correctAnswer: 1,
+  },
+  {
+    question: "দুই বা ততোধিক সমস্যমান পদ সংক্ষেপে মিলিত হয়ে নতুন পদ গঠন করলে, এই প্রক্রিয়াটির দ্বারা অর্থের কি ধরনের পরিবর্তন সাধিত হয়?",
+    options: [
+      "প্রত্যেক পদের নিজস্ব অর্থ সম্পূর্ণরূপে বজায় থাকে।",
+      "মিলিত পদগুলি একটি নতুন ও সংক্ষিপ্ত অর্থ প্রকাশ করে, যা তাদের পৃথক অর্থের চেয়ে ভিন্ন হতে পারে।",
+      "কেবল পদের আকৃতি ছোট হয়, অর্থের কোনো পরিবর্তন হয় না।",
+      "এটি শুধুমাত্র ধ্বনিগত পরিবর্তন আনে।",
+    ],
+    correctAnswer: 1,
+  },
+  {
+    question: "সমস্যমান পদ কাকে বলে – এই সংজ্ঞাটি সমাসের কোন মৌলিক ধারণাকে নির্দেশ করে?",
+    options: [
+      "সমাসবদ্ধ পদের চূড়ান্ত রূপ।",
+      "যে পদগুলি সমাসের পরে তাদের অর্থ হারায়।",
+      "যে পদগুলির মধ্যে সমাস হয় এবং যারা নতুন পদের অংশ হয়।",
+      "শুধুমাত্র ব্যাসবাক্যে ব্যবহৃত পদ।",
+    ],
+    correctAnswer: 2,
+  },
+  {
+    question: "জটিল বাক্যে একটি প্রধান খণ্ড বাক্যের সঙ্গে এক বা একাধিক অপ্রধান খণ্ড বাক্য যুক্ত হওয়ার ফলে বাক্যের অর্থগত কাঠামোতে কী ধরনের প্রভাব পড়ে?",
+    options: [
+      "অপ্রধান খণ্ডবাক্যগুলি প্রধান খণ্ডবাক্যের অর্থকে সম্পূর্ণ স্বাধীন রাখে।",
+      "এটি প্রধান খণ্ডবাক্যের অর্থকে বিস্তারিত করে, শর্তারোপ করে বা তার উপর নির্ভরতা প্রকাশ করে।",
+      "শুধুমাত্র বাক্যের দৈর্ঘ্য বৃদ্ধি করে এবং তাকে দুর্বোধ্য করে তোলে।",
+      "প্রধান খণ্ডবাক্যের অর্থকে অস্পষ্ট করে দেয়।",
+    ],
+    correctAnswer: 1,
+  },
+  {
+    question: "সরল বাক্য তার গঠনগত সরলতার কারণে অর্থের কোন বিশেষ বৈশিষ্ট্য রক্ষা করে?",
+    options: [
+      "একাধিক ধারণার জটিল সমন্বয়।",
+      "একটি মাত্র সম্পূর্ণ ধারণা বা কর্মের সরাসরি প্রকাশ।",
+      "অনেকগুলি অসম্পূর্ণ চিন্তার সমাবেশ।",
+      "আলঙ্কারিক ভাষার ব্যবহার।",
+    ],
+    correctAnswer: 1,
+  },
+  {
+    question: "যৌগিক বাক্যে দুটি বা ততোধিক স্বাধীন বাক্য সমন্বয় অব্যয় দ্বারা যুক্ত হলে তাদের মধ্যে অর্থের সম্পর্ক কীরূপ হয়?",
+    options: [
+      "একটি বাক্য অন্যটির উপর সম্পূর্ণ নির্ভরশীল হয়ে পড়ে।",
+      "বাক্যগুলির স্বতন্ত্র অর্থ বজায় থাকে কিন্তু তারা একটি যৌক্তিক বা সম্পর্কিত ধারণা প্রকাশে সমন্বিত হয়।",
+      "সমন্বয় অব্যয়গুলি বাক্যগুলির অর্থকে সম্পূর্ণ বিপরীত করে দেয়।",
+      "বাক্যগুলি তাদের স্বাধীনতা হারিয়ে ফেলে এবং একটি একক বাক্য গঠন করে।",
+    ],
+    correctAnswer: 1,
+  },
+  {
+    question: "বাক্যে কর্তা, কর্ম বা ভাবের প্রাধান্য অনুসারে বাক্য বিন্যাসকে 'বাচ্য' বলার অন্তর্নিহিত কারণ কী?",
+    options: [
+      "বাক্যের ব্যাকরণগত ত্রুটি এড়ানো।",
+      "বক্তার প্রকাশের অভিপ্রায় অনুযায়ী বাক্যের গুরুত্বের ক্ষেত্র পরিবর্তন করা।",
+      "ক্রিয়া পদের পরিবর্তন এড়ানো।",
+      "বাক্যকে সর্বদা একই সরল গঠনে রাখা।",
+    ],
+    correctAnswer: 1,
+  },
+  {
+    question: "কর্তৃবাচ্য, কর্মবাচ্য, ভাববাচ্য, কর্মকর্তৃবাচ্য – এই চার প্রকার বাচ্যের বিভাজন মূলত কিসের উপর ভিত্তি করে করা হয়েছে?",
+    options: [
+      "বাক্যের দৈর্ঘ্য এবং তাতে ব্যবহৃত শব্দের সংখ্যা।",
+      "ক্রিয়াপদের কাল এবং পুরুষ।",
+      "বাক্যে কর্তা, কর্ম বা ক্রিয়ার ভাবের মধ্যে কার গুরুত্ব অধিক।",
+      "বাক্যটি কতজন ব্যক্তিকে নির্দেশ করছে।",
+    ],
+    correctAnswer: 2,
+  },
+  {
+    question: "ভাববাচ্যে 'ভাবের উপর প্রাধান্য পড়ে' – এর অর্থ কী এবং এটি বাক্যের উপর কী প্রভাব ফেলে?",
+    options: [
+      "এটি বাক্যের কর্তা বা কর্মকে অত্যাবশ্যক করে তোলে।",
+      "এটি ক্রিয়ার অর্থ বা কার্য সম্পাদনের ধারণাকে মুখ্য করে তোলে, কর্তা বা কর্ম এখানে গৌণ থাকে।",
+      "শুধুমাত্র বাক্যের ক্রিয়াপদকে পরিবর্তন করে।",
+      "বাক্যের অর্থকে অস্পষ্ট ও দুর্বোধ্য করে তোলে।",
+    ],
+    correctAnswer: 1,
+  },
+  {
+    question: "কর্মবাচ্যে 'কর্মই প্রধান এবং ক্রিয়া কর্মের অনুগামী হয়' – এই উক্তিটি বাক্যের অর্থ এবং কর্তা-কর্মের সম্পর্কের উপর কী প্রভাব ফেলে?",
+    options: [
+      "এটি কর্তা এবং কর্মের মধ্যে সম্পর্ককে সম্পূর্ণভাবে বিচ্ছিন্ন করে।",
+      "কর্তাকে গৌণ করে কর্মের উপর ক্রিয়া সম্পাদনের জোর প্রদান করে, ফলে ক্রিয়ার রূপ কর্ম দ্বারা নিয়ন্ত্রিত হয়।",
+      "ক্রিয়াপদকে সর্বদা কর্তার অনুগামী হতে বাধ্য করে।",
+      "বাক্যে কোনো অর্থগত পরিবর্তন আনে না, কেবল শব্দবিন্যাস পরিবর্তন করে।",
+    ],
+    correctAnswer: 1,
+  },
+  {
+    question: "সমধাতুজ কর্তা ব্যবহারের মাধ্যমে বাক্যে কী ধরনের বিশেষ গুরুত্ব বা দ্যোতনা সৃষ্টি হয়?",
+    options: [
+      "ক্রিয়া এবং কর্তার মধ্যে সম্পর্ককে অপ্রয়োজনীয় করে তোলে।",
+      "ক্রিয়ার উপর বিশেষ জোর দেয় এবং কাজটি যে কর্তা নিজেই করছে তার উপর জোর দেয়।",
+      "কর্তাকে সম্পূর্ণরূপে নিষ্ক্রিয় দেখায়।",
+      "শুধুমাত্র বাক্যের কাঠামোকে দীর্ঘায়িত করে।",
+    ],
+    correctAnswer: 1,
+  },
+  {
+    question: "সমধাতুজ কর্ম ব্যবহারের মূল উদ্দেশ্য কী এবং এটি বাক্যের অর্থকে কীভাবে প্রভাবিত করে?",
+    options: [
+      "এটি বাক্যের ক্রিয়ার গুরুত্ব হ্রাস করে।",
+      "এটি কর্মের উপর বিশেষ জোর দেয় এবং ক্রিয়ার কার্যকারিতাকে দৃঢ়ভাবে তুলে ধরে।",
+      "কর্মকে বাক্যের বাইরে নিয়ে আসে।",
+      "শুধুমাত্র বাক্যের গঠনকে জটিল করে তোলে।",
+    ],
+    correctAnswer: 1,
+  },
+  {
+    question: "সমাস ও সন্ধির মৌলিক পার্থক্য 'পদের সঙ্গে পদের মিল' এবং 'বর্ণের সঙ্গে বর্ণের মিল' – এই বক্তব্যের দ্বারা তাদের কার্যকারিতা এবং ফলশ্রুতির উপর কী প্রভাব পড়ে?",
+    options: [
+      "সন্ধি নতুন শব্দ তৈরি করে, সমাস বর্ণের পরিবর্তন ঘটায়।",
+      "সমাস একাধিক পদের অর্থে সংক্ষেপ আনয়ন করে নতুন অর্থপূর্ণ পদ তৈরি করে, যেখানে সন্ধি ধ্বনিগত পরিবর্তন ঘটিয়ে উচ্চারণ সহজ করে।",
+      "উভয়ই কেবল বাক্যের সৌন্দর্য বৃদ্ধি করে, অর্থের পরিবর্তন করে না।",
+      "সমাস শুধুমাত্র বিশেষ্য পদে ঘটে, সন্ধি ক্রিয়াপদে।",
+    ],
+    correctAnswer: 1,
+  },
+  {
+    question: "দ্বন্দ্ব সমাসে 'উভয় পদের অর্থই সমানভাবে প্রাধান্য পায়' – এই বৈশিষ্ট্যটি পদের অর্থগত সম্পর্কের উপর কী প্রভাব ফেলে?",
+    options: [
+      "একটি পদের অর্থ অন্যটিকে সম্পূর্ণভাবে বাতিল করে দেয়।",
+      "দুটি পৃথক ধারণা একত্রিত হয়ে একটি একক অথচ দ্বৈত অর্থের সমন্বয় ঘটায়।",
+      "একটি পদ অপরটির উপর নির্ভরশীল হয়ে পড়ে।",
+      "কোনো পদের অর্থই বাক্যে গুরুত্বপূর্ণ থাকে না।",
+    ],
+    correctAnswer: 1,
+  },
+  {
+    question: "বহুব্রীহি সমাসে 'সমস্যমান পদের অর্থ নয়, অন্য পদের অর্থ প্রধান হয়' – এই ব্যতিক্রমী বৈশিষ্ট্যটি সমাসবদ্ধ পদের তাৎপর্যের উপর কী প্রভাব ফেলে?",
+    options: [
+      "এটি সমস্যমান পদগুলির অর্থকে অপরিবর্তিত রাখে।",
+      "এটি সমস্যমান পদগুলির দ্বারা সরাসরি অনুল্লেখিত একটি তৃতীয় সত্তা বা বৈশিষ্ট্যকে নির্দেশ করে।",
+      "এটি শুধুমাত্র সমাসবদ্ধ পদের ব্যাকরণগত শ্রেণী পরিবর্তন করে।",
+      "এতে পদের অর্থ সম্পূর্ণরূপে লুপ্ত হয়ে যায়।",
+    ],
+    correctAnswer: 1,
+  },
+  {
+    question: "তৎপুরুষ সমাসে 'পরপদের অর্থ প্রধান হয়' – এই নিয়মটি সমাসবদ্ধ পদের সামগ্রিক অর্থ নির্ধারণে কীভাবে ভূমিকা পালন করে?",
+    options: [
+      "পূর্বপদটি পরপদের অর্থকে সম্পূর্ণভাবে অতিক্রম করে।",
+      "পরপদটি সমাসবদ্ধ পদের মূল অর্থ বহন করে এবং পূর্বপদটি তাকে বিশেষিত করে বা তার সঙ্গে সম্পর্ক স্থাপন করে।",
+      "পূর্বপদ ও পরপদ উভয়েই সমান গুরুত্ব পায়।",
+      "কোনো পদের অর্থই গুরুত্বপূর্ণ থাকে না।",
+    ],
+    correctAnswer: 1,
+  },
+  {
+    question: "কর্মধারয় সমাসে 'বিশেষণ ও বিশেষ্য মিলিত হয় এবং উভয় পদের অর্থ একই ব্যক্তিকে নির্দেশ করে' – এই সংজ্ঞাটির দ্বারা অর্থের কোন গভীরতর সংযুক্তি প্রকাশ পায়?",
+    options: [
+      "বিশেষণ ও বিশেষ্যের পৃথক অস্তিত্ব বজায় থাকে।",
+      "বিশেষণটি বিশেষ্যের গুণ বা প্রকৃতিকে এমনভাবে একীভূত করে যে তারা অভিন্ন সত্তা বোঝায়।",
+      "বিশেষ্য পদটি তার বিশেষণ গুণ হারায়।",
+      "উভয় পদই নতুন কোনো অর্থ তৈরি করে।",
+    ],
+    correctAnswer: 1,
+  },
+  {
+    question: "মধ্যপদলোপী কর্মধারয় সমাসে 'মধ্যবর্তী পদ লোপ পায়' – এই প্রক্রিয়ার মাধ্যমে অর্থের সংক্ষেপণ ছাড়া আর কী ধরনের প্রভাব ঘটে?",
+    options: [
+      "অর্থ সম্পূর্ণরূপে পরিবর্তিত হয়।",
+      "বাক্যের মধ্যে অপ্রয়োজনীয় পদগুলি বাদ পড়ে এবং বাক্যটি আরও সংক্ষিপ্ত ও কার্যকর হয়।",
+      "শুধুমাত্র বাক্যের সৌন্দর্য বৃদ্ধি পায়।",
+      "লোপপ্রাপ্ত পদটির অর্থ সম্পূর্ণ হারিয়ে যায়।",
+    ],
+    correctAnswer: 1,
+  },
+  {
+    question: "রূপক কর্মধারয় সমাসে 'উপমেয় ও উপমানের মধ্যে অভেদ সম্পর্ক স্থাপিত' হওয়ার ফলে অর্থের কি ধরনের নিবিড়তা প্রকাশ পায়?",
+    options: [
+      "উপমেয় ও উপমান একে অপরের থেকে সম্পূর্ণ আলাদা থাকে।",
+      "উপমেয়কে উপমানের সঙ্গে এমনভাবে অভিন্ন করে দেখানো হয় যে তাদের মধ্যে কোনো পার্থক্য কল্পনা করা যায় না।",
+      "শুধুমাত্র উপমেয়ের গুণ প্রকাশ পায়।",
+      "উপমানের গুরুত্ব সম্পূর্ণরূপে কমে যায়।",
+    ],
+    correctAnswer: 1,
+  },
+  {
+    question: "সম্বন্ধ পদ 'অন্য পদের সঙ্গে সম্পর্ক নির্দেশ করে' – এই সম্পর্কটি বাক্যের মধ্যে কী ধরনের সংযোগ স্থাপন করে?",
+    options: [
+      "ক্রিয়া পদের সাথে কর্তার সরাসরি সংযোগ।",
+      "একটি বিশেষ্য বা সর্বনাম পদের সাথে অন্য একটি পদের মালিকানা, অধিকার বা অন্য কোনো প্রকারের সম্পর্ক।",
+      "বাক্যের দুটি ভিন্ন অংশের মধ্যে কালগত সম্পর্ক।",
+      "শুধুমাত্র দুটি পদের ধ্বনিগত সাদৃশ্য।",
+    ],
+    correctAnswer: 1,
+  },
+  {
+    question: "কাউকে সম্বোধন করতে ব্যবহৃত পদকে 'সম্বোধন পদ' বলার মাধ্যমে বাক্যে এর কোন বিশেষ কার্যকারিতা প্রকাশ পায়?",
+    options: [
+      "এটি বাক্যের প্রধান ক্রিয়াকে নির্দেশ করে।",
+      "এটি বক্তার মনোযোগ আকর্ষণের জন্য বা সরাসরি কাউকে উদ্দেশ্য করে ব্যবহৃত হয়, যা বাক্যের মূল অর্থকে প্রভাবিত করে না।",
+      "এটি বাক্যের উদ্দেশ্য পরিবর্তন করে।",
+      "শুধুমাত্র বাক্যের মধ্যে একটি আলঙ্কারিক উপাদান হিসেবে কাজ করে।",
+    ],
+    correctAnswer: 1,
+  },
+  {
+    question: "আকাঙ্ক্ষা, যোগ্যতা, আসত্তি – বাক্য গঠনের এই তিনটি শর্তের মধ্যে কোনো একটির অভাব হলে বাক্যের চূড়ান্ত ফল কী হয়?",
+    options: [
+      "বাক্যটি শুধুমাত্র ব্যাকরণগতভাবে ভুল হয়।",
+      "বাক্যটি অর্থপূর্ণ হলেও জটিল মনে হয়।",
+      "বাক্যটি তার অর্থবহতা এবং যোগাযোগ স্থাপনের ক্ষমতা হারায়।",
+      "বাক্যের সৌন্দর্য হ্রাস পায় কিন্তু অর্থ অপরিবর্তিত থাকে।",
+    ],
+    correctAnswer: 2,
+  },
+  {
+    question: "বাক্যের পদগুলিকে সঠিক ক্রমে সাজিয়ে স্পষ্ট অর্থ প্রকাশ করাকে 'আসত্তি' বলে। আসত্তির অভাব হলে যোগাযোগের ক্ষেত্রে কী ধরনের গুরুতর সমস্যা সৃষ্টি হতে পারে?",
+    options: [
+      "বক্তা যা বলতে চায়, শ্রোতা তা সঠিকভাবে বুঝতে পারে না বা ভুল অর্থ গ্রহণ করে।",
+      "বাক্যটি দীর্ঘ হয়ে যায় কিন্তু তার অর্থ আরও স্পষ্ট হয়।",
+      "শুধুমাত্র বাক্যের ব্যাকরণগত বিশুদ্ধতা নষ্ট হয়।",
+      "বাক্যের কোনো পরিবর্তন হয় না, কেবল তার গঠন আলাদা দেখায়।",
+    ],
+    correctAnswer: 0,
+  },
+  {
+    question: "অধিকরণ কারক এবং সম্বন্ধ পদের মধ্যে ক্রিয়ার সাথে তাদের সম্পর্কের মৌলিক পার্থক্য কোথায়?",
+    options: [
+      "অধিকরণ কারক ক্রিয়ার স্থান বা কাল নির্দেশ করে, যেখানে সম্বন্ধ পদ ক্রিয়ার সাথে সরাসরি সম্পর্কযুক্ত নয় বরং দুটি বিশেষ্যের সম্পর্ক বোঝায়।",
+      "উভয়ই ক্রিয়ার সাথে সরাসরি সম্পর্কযুক্ত কিন্তু ভিন্নভাবে।",
+      "অধিকরণ কারক সবসময় প্রাণিবাচক হয়, কিন্তু সম্বন্ধ পদ তা নয়।",
+      "সম্বন্ধ পদ ক্রিয়াপদকে প্রভাবিত করে, অধিকরণ কারক করে না।",
+    ],
+    correctAnswer: 0,
+  },
+  {
+    question: "বিভিন্ন প্রকার সমাস ব্যবহারের মাধ্যমে বাক্যের সংক্ষেপণ ছাড়াও অর্থের কোন বিশেষ দিকটি প্রভাবিত হয় এবং এর ফলে লেখকের শৈলীতে কী পরিবর্তন আসে?",
+    options: [
+      "সমাস শুধুমাত্র শব্দের সংখ্যা কমায়, অর্থের কোনো গভীরতা যোগ করে না।",
+      "এটি একাধিক ধারণাকে একটি একক, নিবিড় কাঠামোতে সংযুক্ত করে, যার ফলে বাক্য আরও সুনির্দিষ্ট, অলঙ্কারপূর্ণ এবং প্রকাশভঙ্গিতে গভীরতা আসে।",
+      "সমাস প্রয়োগে বাক্য দীর্ঘ ও জটিল হয়ে পড়ে।",
+      "এর ফলে বাক্যের অর্থ সম্পূর্ণভাবে অস্পষ্ট হয়ে যায়।",
+    ],
+    correctAnswer: 1,
+  },
+];
+/*===Pest Hear===*/
+ let studentName = '';
+        let rollNumber = '';
+        let userAnswers = new Array(questions.length).fill(null);
+        let quizStartTime;
+        let quizTimerInterval;
+        const TIME_LIMIT_SECONDS = 30 * 60; // 30 minutes in seconds
+
+        const studentInfoSection = document.getElementById('student-info-section');
+        const quizContainer = document.getElementById('quiz-container');
+        const resultContainer = document.getElementById('result-container');
+        const studentInfoForm = document.getElementById('student-info-form');
+        const questionsArea = document.getElementById('questions-area');
+        const submitQuizButton = document.getElementById('submit-quiz-button');
+        const quizTimerElement = document.getElementById('quiz-timer');
+        const reviewQuestionsArea = document.getElementById('review-questions-area');
+        const downloadPdfButton = document.getElementById('download-pdf-button');
+        const retryQuizButton = document.getElementById('retry-quiz-button');
+
+        studentInfoForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            studentName = document.getElementById('student-name').value.trim();
+            rollNumber = document.getElementById('roll-number').value.trim();
+
+            if (!studentName || !rollNumber) {
+                alert('শিক্ষার্থীর নাম এবং রোল নম্বর উভয়ই পূরণ করুন।');
+                return;
+            }
+
+            studentInfoSection.style.display = 'none';
+            quizContainer.style.display = 'block';
+            quizTimerElement.style.display = 'block';
+            startQuiz();
+        });
+
+        function startQuiz() {
+            renderQuestions();
+            quizStartTime = Date.now();
+            startTimer();
+            submitQuizButton.disabled = false;
+        }
+
+        function renderQuestions() {
+            questionsArea.innerHTML = '';
+            questions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.classList.add('question');
+                questionDiv.innerHTML = `
+                    <p>প্রশ্ন ${index + 1}: ${q.question}</p>
+                    <div class="options" id="options-${index}">
+                        ${q.options.map((option, optIndex) => `
+                            <label>
+                                <input type="radio" name="question-${index}" value="${optIndex}" data-question-index="${index}" ${userAnswers[index] === optIndex ? 'checked' : ''}>
+                                <span>${option}</span>
+                            </label>
+                        `).join('')}
+                    </div>
+                `;
+                questionsArea.appendChild(questionDiv);
+            });
+
+            // Add event listeners for radio buttons
+            questionsArea.querySelectorAll('input[type="radio"]').forEach(radio => {
+                radio.addEventListener('change', function() {
+                    const qIndex = parseInt(this.dataset.questionIndex);
+                    userAnswers[qIndex] = parseInt(this.value);
+                });
+            });
+        }
+
+        function startTimer() {
+            let timeLeft = TIME_LIMIT_SECONDS;
+
+            function updateTimer() {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                quizTimerElement.textContent = `সময় বাকি: ${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+                if (timeLeft <= 0) {
+                    clearInterval(quizTimerInterval);
+                    alert('সময় শেষ! আপনার কুইজ স্বয়ংক্রিয়ভাবে জমা দেওয়া হচ্ছে।');
+                    submitQuiz();
+                } else {
+                    timeLeft--;
+                }
+            }
+
+            updateTimer(); // Initial call
+            quizTimerInterval = setInterval(updateTimer, 1000);
+        }
+
+
+        submitQuizButton.addEventListener('click', submitQuiz);
+
+        function submitQuiz() {
+            clearInterval(quizTimerInterval);
+
+            // Check if all questions are answered
+            const unansweredQuestions = userAnswers.filter(answer => answer === null).length;
+            if (unansweredQuestions > 0) {
+                if (!confirm(`আপনি ${unansweredQuestions}টি প্রশ্নের উত্তর দেননি। আপনি কি নিশ্চিতভাবে কুইজ জমা দিতে চান?`)) {
+                    startTimer(); // Resume timer if not submitting
+                    return;
+                }
+            }
+
+            let correctAnswersCount = 0;
+            questions.forEach((q, index) => {
+                if (userAnswers[index] === q.correctAnswer) {
+                    correctAnswersCount++;
+                }
+            });
+
+            const totalMarks = questions.length;
+            const obtainedMarks = correctAnswersCount;
+            const percentage = (obtainedMarks / totalMarks) * 100;
+            const grade = calculateGrade(percentage);
+
+            displayResults(totalMarks, obtainedMarks, percentage, grade);
+            highlightAnswers();
+
+            quizContainer.style.display = 'none';
+            resultContainer.style.display = 'block';
+            quizTimerElement.style.display = 'none'; // Hide timer after submission
+        }
+
+        function calculateGrade(percentage) {
+            if (percentage >= 90) return 'A+';
+            if (percentage >= 80) return 'A';
+            if (percentage >= 70) return 'B';
+            if (percentage >= 60) return 'C';
+            if (percentage >= 50) return 'D';
+            return 'F';
+        }
+
+        function displayResults(total, obtained, percent, grade) {
+            document.getElementById('result-student-name').textContent = studentName;
+            document.getElementById('result-roll-number').textContent = rollNumber;
+            document.getElementById('total-marks').textContent = total;
+            document.getElementById('obtained-marks').textContent = obtained;
+            document.getElementById('percentage').textContent = percent.toFixed(2) + '%';
+            document.getElementById('grade').textContent = grade;
+            document.getElementById('result-date').textContent = new Date().toLocaleDateString('bn-BD', {
+                year: 'numeric', month: 'long', day: 'numeric'
+            });
+        }
+
+        function highlightAnswers() {
+            reviewQuestionsArea.innerHTML = ''; // Clear previous review
+            questions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.classList.add('question-for-print'); // Class for print and review
+                const selectedAnswerIndex = userAnswers[index];
+                const correctAnswerIndex = q.correctAnswer;
+
+                let questionHtml = `<p>প্রশ্ন ${index + 1}: ${q.question}</p>`;
+                q.options.forEach((option, optIndex) => {
+                    let optionClasses = 'option-for-print';
+                    if (optIndex === correctAnswerIndex) {
+                        optionClasses += ' correct'; // Mark as correct answer
+                    }
+                    if (optIndex === selectedAnswerIndex && selectedAnswerIndex !== correctAnswerIndex) {
+                        optionClasses += ' wrong-selected'; // Mark as selected and wrong
+                    }
+
+                    questionHtml += `<span class="${optionClasses}">${option}</span>`;
+                });
+                questionDiv.innerHTML = questionHtml;
+                reviewQuestionsArea.appendChild(questionDiv);
+
+                // Now for the interactive quiz view (if user were to go back, though current UX doesn't allow)
+                // For final submission review, this section doesn't usually display.
+                // However, if we wanted to show highlights ON the quiz page itself AFTER submission,
+                // we'd use the following logic on the #questions-area elements.
+                // Since the prompt asks to show "Correct answers highlighted in green" and "Wrong answers highlighted in red"
+                // and "Show correct answer if student selected wrong" I will apply this to the hidden quiz questions
+                // so if they were visible, they would show this. The main display is the `reviewQuestionsArea`.
+
+                const optionsDiv = document.getElementById(`options-${index}`);
+                if (optionsDiv) {
+                    optionsDiv.querySelectorAll('label').forEach((label, optIndex) => {
+                        label.style.pointerEvents = 'none'; // Disable further selection
+                        if (optIndex === correctAnswerIndex) {
+                            label.classList.add('correct-label'); // General class for correct option
+                            if (selectedAnswerIndex === correctAnswerIndex) {
+                                label.classList.add('correct-answer'); // Selected and correct
+                            }
+                        }
+                        if (optIndex === selectedAnswerIndex && selectedAnswerIndex !== correctAnswerIndex) {
+                            label.classList.add('wrong-answer'); // Selected and wrong
+                        }
+                        if (selectedAnswerIndex !== correctAnswerIndex) {
+                            // If selected answer was wrong, also highlight the correct one lightly
+                            if (optIndex === correctAnswerIndex) {
+                                label.closest('.question').classList.add('wrong-selected'); // Mark parent to adjust styling
+                            }
+                        }
+                    });
+                }
+            });
+        }
+
+
+        downloadPdfButton.addEventListener('click', function() {
+            window.print();
+        });
+
+        retryQuizButton.addEventListener('click', function() {
+            // Reset all state variables
+            studentName = '';
+            rollNumber = '';
+            userAnswers = new Array(questions.length).fill(null);
+            clearInterval(quizTimerInterval);
+
+            // Reset UI elements
+            document.getElementById('student-name').value = '';
+            document.getElementById('roll-number').value = '';
+            questionsArea.innerHTML = '';
+            reviewQuestionsArea.innerHTML = '';
+            quizTimerElement.textContent = 'সময় বাকি: 30:00';
+            submitQuizButton.disabled = true;
+
+            // Show student info section, hide others
+            studentInfoSection.style.display = 'block';
+            quizContainer.style.display = 'none';
+            resultContainer.style.display = 'none';
+            quizTimerElement.style.display = 'none';
+        });
+
+        // Initialize quiz
+        // No explicit initialization needed beyond what's handled by event listeners.
+        // The student info section is visible by default.
+    </script>
+</body>
+</html>
